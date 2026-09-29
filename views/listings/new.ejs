@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+    <h1 class="offset-2">Create new Listing</h1>
+        <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+<div class="row">
+<div class="col-8 offset-2">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Title:</label>
+  <input type="text" name="listing[title]" placeholder="Enter Title Here" class="form-control" id="exampleFormControlInput1" required >
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" type="text" name="listing[description]" required></textarea>
+</div>
+
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Upload Image:</label>
+  <input type="file" name="listing[image]"  class="form-control" id="exampleFormControlInput1" required>
+</div>
+<div class="row">
+    <div class="col-md-6">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Price:</label>
+  <input type="number" name="listing[price]" placeholder="Enter price" class="form-control" id="exampleFormControlInput1" required>
+</div>
+</div>
+<div class="col-md-6 ">
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Location:</label>
+  <input type="text" name="listing[location]" placeholder="Enter location" class="form-control" id="exampleFormControlInput1" required >
+</div>
+</div>
+</div>
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Country:</label>
+  <input type="text" name="listing[country]" placeholder="Enter country name" class="form-control" id="exampleFormControlInput1" required>
+</div>
+  <button type="submit" class="btn btn-danger col-12">Add</button>
+    </form>
+    </div>
+    </div>
+</body>

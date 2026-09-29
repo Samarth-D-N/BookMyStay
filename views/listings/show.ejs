@@ -1,0 +1,212 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="container mt-4">
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 col-lg-7">
+
+                <h1 class="mb-3">
+                    <%= data.title %>
+                </h1>
+
+                <div class="card ">
+
+                    <!-- Listing Image -->
+                    <img src="<%= data.image.url %>" class="card-img-top listing-show-img" alt="listing image"
+                        style="height: 350px; object-fit: cover;">
+
+                    <div class="card-body">
+
+                        <p class="card-text">
+                            Owned By: <i>
+                                <%= data.owner.username %>
+                            </i>
+                        </p>
+
+                        <p class="card-text">
+                            <%= data.description %>
+                        </p>
+
+                        <p class="card-text">
+                            &#8377;<%= data.price.toLocaleString("en-IN") %>/night
+                        </p>
+
+                        <p class="card-text">
+                            <%= data.location %>
+                        </p>
+
+                        <p class="card-text">
+                            <%= data.country %>
+                        </p>
+
+                        <% if( currentUser && currentUser._id.equals(data.owner._id )) {%>
+
+                            <div class="d-flex gap-3 mt-4">
+
+                                <a href="/listings/<%= data._id %>/edit" class="btn btn-danger">
+                                    Edit
+                                </a>
+
+                                <form method="post" action="/listings/<%= data._id %>?_method=DELETE">
+
+                                    <button class="btn btn-dark">
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+                            <% } %>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <hr>
+    <br>
+    <% if(currentUser){ %>
+        <div>
+            <form method="post" action="/listings/<%= data._id %>/reviews" novalidate class="needs-validation">
+                <div class="row">
+                    <div class="col-8 offset-2">
+                        <h1>Add Your Review Here</h1>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Comment:</label>
+                            <input type="text" name="review[comment]" placeholder="Enter Comment" class="form-control"
+                                id="exampleFormControlInput1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="review" class="form-label">Rating</label>
+                            <fieldset class="starability-slot ">
+
+                                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1"
+                                    checked aria-label="No rating." />
+                                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                                <label for="first-rate1" title="Terrible">1 star</label>
+                                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                                <label for="first-rate2" title="Not good">2 stars</label>
+                                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                                <label for="first-rate3" title="Average">3 stars</label>
+                                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                                <label for="first-rate4" title="Very good">4 stars</label>
+                                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                                <label for="first-rate5" title="Amazing">5 stars</label>
+                            </fieldset>
+                        </div> <button class="btn btn-dark">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <% } %>
+
+            <br>
+            <hr>
+
+            <div class="row mt-5">
+                <div class="col-10 offset-1">
+
+                    <h2 class="mb-4">Guest Reviews</h2>
+
+                    <div class="row">
+                        <% for(let rev of data.review){ %>
+
+                            <div class="col-md-6 mb-4">
+                                <div class="review-card">
+
+                                    <div class="review-header">
+
+                                        <div class="review-user">
+
+                                            <div class="user-avatar">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+
+                                            <div>
+                                                <% if (rev.author) { %>
+                                                    <h5 class="mb-0">
+                                                        <%= rev.author.username %>
+                                                    </h5>
+                                                    <% } else { %>
+                                                        <h5 class="mb-0">Unknown User</h5>
+                                                        <% } %>
+
+                                                            <small class="text-muted">Verified User</small>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="rating">
+                                            <p class="starability-result  card-text" data-rating="<%= rev.rating %>">
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <p class="review-comment">
+                                        "<%= rev.comment %>"
+                                    </p>
+
+                                    <% if (currentUser && rev.author && currentUser._id.equals(rev.author._id)) { %>
+
+                                        <form method="post"
+                                            action="/listings/<%= data._id %>/reviews/<%= rev._id %>?_method=DELETE"
+                                            class="mt-2">
+
+                                            <button class="btn btn-dark">Delete</button>
+
+                                        </form>
+
+                                        <% } %>
+
+                                </div>
+                            </div>
+
+                            <% } %>
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+            </div>
+
+            <br>
+            <hr>
+            <div class="row">
+                <div class="col-8 offset-2">
+                <h2>Where you will be:</h2>
+          <div id="map" >
+            
+
+          </div>
+          </div>
+          </div>
+<script>
+    const coordinates = <%- JSON.stringify(data.geometry.coordinates) %>;
+
+    console.log(coordinates);
+    console.log(typeof coordinates);
+    console.log(Array.isArray(coordinates));
+
+    const map = new mapboxgl.Map({
+        accessToken: "<%= process.env.MAP_TOKEN %>",
+        container: 'map',
+        center: coordinates,
+        zoom: 9
+    });
+
+    const marker1 = new mapboxgl.Marker({color:"red"})
+        .setLngLat(coordinates)
+        .setPopup(
+         new mapboxgl.Popup({ offset: 25 })
+        .setHTML("<h6>Exact Location will be Provided after Booking!</h6>")
+        .setMaxWidth("300px")
+)
+        .addTo(map);
+</script>

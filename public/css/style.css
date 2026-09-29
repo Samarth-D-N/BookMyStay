@@ -1,0 +1,142 @@
+.navbar{
+    height: 80px;
+    background-color: whitesmoke;
+    border-bottom: 1px solid black;
+
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer{
+    margin-top: auto;
+}
+
+.fa-compass{
+    color: #FF385C;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: black !important; 
+}
+
+.footerd{
+    height: 120px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.2rem;
+    background-color: rgb(180, 181, 181);
+}
+
+
+.containerCardBoilerplate{
+    width: 100%!important;
+
+}
+
+.cards-listings{
+    display: flex;
+    justify-content: center;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    row-gap: 2rem;
+    column-gap: 1.5rem;
+}
+
+.card{
+    border: none !important;
+}
+
+.listing-card-img {
+    border-radius: 1rem !important;
+    height: 20rem;
+    width: 20rem!important;
+    object-fit: cover;
+}
+
+.listing-show-img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.listing-card-img{
+ opacity: .9;
+ transform: scale(1.02);
+}
+
+.anchorUnderLine{
+    text-decoration: none;
+    color: black;
+}
+
+
+.errorMessageCenter{
+    text-align:center ;
+    font-weight: 500;
+}
+
+/* review styling  */
+
+.review-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 15px;
+    padding: 20px;
+    height: 100%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rating {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.review-comment {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+
+#map{
+    width: 100%;
+    height: 60vh;
+}
+
+

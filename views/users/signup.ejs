@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+
+    <h2 class="offset-3 mb-3">SignUp on BookMyStay:</h2>
+    <form method="post" action="/signup" novalidate class="needs-validation">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email:</label>
+                    <input type="email" name="user[email]" placeholder="Enter Your Email Here" class="form-control"
+                        id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Username:</label>
+                    <input type="text" name="user[username]" placeholder="Enter Your Username Here" class="form-control"
+                        id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Password:</label>
+                    <input type="password" name="user[password]" placeholder="Enter Your Username Here" class="form-control"
+                        id="exampleFormControlInput1" required>
+                </div>
+
+                  <button type="submit" class="btn btn-success col-12">SignUp</button>
+
+            </div>
+        </div>
